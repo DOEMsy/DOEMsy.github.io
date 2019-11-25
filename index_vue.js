@@ -54,11 +54,11 @@ var Body_Vue = new Vue({
         },
         Button_right_block: (i, j) => {
             if (canclick == false) return;
-            Body_Vue.click_time++;
             if (Body_Vue.screen_map[i][j] == -2) {
                 if (Body_Vue.click_time == 0) {
                     start();
                 }
+                Body_Vue.click_time++;
                 Vue.set(Body_Vue.screen_map[i], j, -3);
                 if (Body_Vue.real_map[i][j] == -1)
                     haspri++;
@@ -110,11 +110,11 @@ var Body_Vue = new Vue({
         },
         Event_Failed: () => {
             stop();
-            console.log('失败');
+            //console.log('失败');
             timeoffail++;
             canclick = false;
             var score = timeoffail / 8;
-            console.log(score);
+            //console.log(score);
             for (var i = 0; i < n; i++) {
                 for (var j = 0; j < m; j++) {
                     if (Body_Vue.real_map[i][j] == -1) {
@@ -131,7 +131,7 @@ var Body_Vue = new Vue({
             b *= 0.9;
         },
         Event_Win: () => {
-            console.log('胜利');
+            //console.log('胜利');
             stop();
             canclick = false;
             timeofwin++;
@@ -156,7 +156,7 @@ var Body_Vue = new Vue({
 
 var Random_area = (random_array,score_array) => {
     var randnum = Math.random();
-    console.log(randnum,random_array,score_array);
+    //console.log(randnum,random_array,score_array);
     var x=0,s=score_array[0];
     for(var i=0;i<random_array.length;i++){
         if(x<=randnum&&randnum<s){
@@ -184,7 +184,7 @@ var Random_str = (score) => {
     }
 }
 
-var BFS = (i, j, click, callback) => {
+var BFS = (i, j, click, callback = ()=>{return false;}) => {
     var q = new Queue();
     var next = [
         [0, 1],
@@ -209,13 +209,13 @@ var BFS = (i, j, click, callback) => {
         for (var h = 0; h < m; h++)
             book_bfs_map[o][h] = 0;
     }
-    console.log(book_bfs_map);
+    //console.log(book_bfs_map);
     book_bfs_map[i][j] = 1;
-    console.log(book_bfs_map);
-    console.log(q.quere());
+    //console.log(book_bfs_map);
+    //console.log(q.quere());
     while (!q.empty()) {
         var c = q.pop()
-        console.log(c);
+        //console.log(c);
         var no_mine = true;
         if (Body_Vue.real_map[c[0]][c[1]] >= 0) {
             for (var o = 0; o < 8; o++) {
@@ -380,7 +380,7 @@ var Alert = (title, str, form, delay = 3500, color = [255, 255, 255, 1.0], displ
     $("." + time).delay(delay).slideUp(700);
     //$("."+time).show('slow');
     //$("."+time).delay(1900).slideUp( 700 );
-    console.log("." + time);
+    //console.log("." + time);
 }
 
 var hour, minute, second; //时 分 秒

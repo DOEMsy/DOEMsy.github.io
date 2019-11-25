@@ -67,11 +67,11 @@
 	<script src="./js/starlight.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$("#main").hide();
-		$(document).ready(function(){
+		$("body").ready(function(){
 			$('[data-toggle="tooltip"]').tooltip();   
-		});
-		document.oncontextmenu = nocontextmenu;  
-		document.onmousedown = norightclick;   
+		}); 
+		window.onmousedown = ()=>{return false;};
+		window.oncontextmenu = ()=>{return false;};   
 	</script>
 </body>
 
