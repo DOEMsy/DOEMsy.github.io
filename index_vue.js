@@ -38,7 +38,11 @@ var Body_Vue = new Vue({
 
     },
     methods: {
-        Button_begin: () => {
+        /*
+            按钮事件：单机开始按钮
+            功能：游戏参数重制，地图初始化
+        */
+        Button_begin: () => {        
             $('#main').slideUp('fast', () => {
                 Vue.set(Body_Vue, 'beginstr', '重新开始');
                 Reset();
@@ -52,6 +56,9 @@ var Body_Vue = new Vue({
 
             });
         },
+        /*
+            按钮事件：右键区块
+        */
         Button_right_block: (i, j) => {
             if (canclick == false) return;
             if (Body_Vue.screen_map[i][j] == -2) {
@@ -91,6 +98,9 @@ var Body_Vue = new Vue({
             }
 
         },
+        /*
+            按钮事件：左键区块
+        */
         Button_left_block: (i, j) => {
             if (canclick == false) return;
             if (Body_Vue.screen_map[i][j] == -2) {
@@ -108,6 +118,37 @@ var Body_Vue = new Vue({
                 Body_Vue.openblock++;
             }
         },
+        /*
+            按钮事件：移动端触摸
+        */
+        Button_touchstart: (i,j)=>{
+            timeOutEvent = setTimeout(()=>{
+                ()=>{
+                    timeOutEvent = 0;
+                    Body_Vue.Button_right_block(i,j);
+                }
+            },500);
+        },
+        /*
+            按钮事件：移动端触摸结束
+        */
+        Button_touchend: (i,j)=>{
+            clearTimeout(timeOutEvent);
+            if(timeOutEvent!=0){
+                Body_Vue.Button_left_block(i,j);
+            }
+        },
+        /*
+            按钮事件：移动端触摸滑动
+        */
+        Button_touchmove:()=>{      
+            clearTimeout(timeOutEvent);
+            timeOutEvent = 0;
+        },
+
+        /*
+            游戏事件：失败
+        */
         Event_Failed: () => {
             stop();
             //console.log('失败');
@@ -130,6 +171,10 @@ var Body_Vue = new Vue({
             g *= 0.9;
             b *= 0.9;
         },
+
+        /*
+            游戏事件：胜利
+        */
         Event_Win: () => {
             //console.log('胜利');
             stop();
@@ -143,7 +188,9 @@ var Body_Vue = new Vue({
                 Alert('胜利', timeofwin + '胜' + timeoffail + '负', 'success', 3500, [200, 225, 200, 0.8]);
             }
         },
-
+        /*
+            鼠标事件：接触和离开
+        */
         mouseOver: (i, j) => {
             Body_Vue.active[i][j] = 'opacity:0.8;';
         },
