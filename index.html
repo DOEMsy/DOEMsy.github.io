@@ -12,6 +12,15 @@
 			width: 100%;
 			overflow: hidden;
 		}
+
+		* {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
 	</style>
 </head>
 
@@ -60,8 +69,8 @@
 					style="padding: 0px;margin: 0%;height: 5%;">
 					<div v-bind:id="'block '+i+' '+j" @click.left="Button_left_block(i,j)"
 						@click.right="Button_right_block(i,j)" @mouseover="mouseOver(i,j)" @mouseleave="mouseLeave(i,j)"
-						@touchstart="Button_touchstart(i,j)" @touchmove="Button_touchmove()" @touchend="Button_touchend(i,j)"
-						class="block col border" v-for="(block,j) of line"
+						@touchstart="Button_touchstart(i,j)" @touchmove="Button_touchmove()"
+						@touchend="Button_touchend(i,j)" class="block col border" v-for="(block,j) of line"
 						:style="active[i][j] + 'height:100%;padding: 0px;'">
 						<div class="bg-danger" v-if="block==-1" style="height:100%;"></div>
 						<div class="bg-primary" v-else-if="block==-2" style="height:100%;"></div>
