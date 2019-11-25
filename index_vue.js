@@ -6,7 +6,7 @@ var haswrongpri = 0 //错误标记的数
 var timeoffail = 0;
 var timeofwin = 0;
 var canclick = true;
-
+var timeOutEvent=0;
 
 var g = 245;
 var b = 245;
@@ -60,6 +60,7 @@ var Body_Vue = new Vue({
             按钮事件：右键区块
         */
         Button_right_block: (i, j) => {
+            //console.log(timeOutEvent);
             if (canclick == false) return;
             if (Body_Vue.screen_map[i][j] == -2) {
                 if (Body_Vue.click_time == 0) {
@@ -123,10 +124,8 @@ var Body_Vue = new Vue({
         */
         Button_touchstart: (i,j)=>{
             timeOutEvent = setTimeout(()=>{
-                ()=>{
-                    timeOutEvent = 0;
-                    Body_Vue.Button_right_block(i,j);
-                }
+                console.log(timeOutEvent);
+                Body_Vue.Button_right_block(i,j);
             },500);
         },
         /*
@@ -134,9 +133,13 @@ var Body_Vue = new Vue({
         */
         Button_touchend: (i,j)=>{
             clearTimeout(timeOutEvent);
+            timeOutEvent = 0;
+            /*
             if(timeOutEvent!=0){
+                console.log(timeOutEvent);
                 Body_Vue.Button_left_block(i,j);
             }
+            */
         },
         /*
             按钮事件：移动端触摸滑动
