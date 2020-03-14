@@ -12,7 +12,7 @@ struct segment_tree_node{
 
 class segment_tree{
 private:
-    segment_tree_node tree[Tree_Max_Size];
+    segment_tree_node tree[4*Tree_Max_Size];
 public:
     segment_tree(int l,int r,int v=0,int k = 1){Build(l,r,v,k);}
 
@@ -24,7 +24,7 @@ public:
             tree[k].w=v;
         }else{
             Build(l,(l+r)>>1,k<<1);
-            Build((l+r)/>>1|1,r,k<<1|1);
+            Build((l+r)>>1|1,r,k<<1|1);
             tree[k].w = PushUp(tree[k<<1].w,tree[k<<1|1].w);
         }
     }
